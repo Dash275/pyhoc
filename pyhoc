@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import pwd
+import os
+import sys
+import re
+
+def user_prompt():
+    os.getlogin = lambda: pwd.getpwuid(os.getuid())[0]
+    return os.getlogin()
+
+def comp_prompt():
+    return os.uname().nodename
+
+def login_prompt():
+    user = user_prompt()
+    comp = comp_prompt()
+    login = "@".join([user, comp])
+    return login
+
+def dir_prompt():
+    cwd = os.getcwd()
+    uname = user_prompt()
+    homedir = "".join(["/home/", uname])
+    if re.match(homedir, cwd):
+        cwd = re.sub(homedir, "~", cwd)
+    return cwd
+
+def main():
+    out = ""
+    return out
+
+if __name__ == '__main__':
+    output = main()
+    if output: sys.stdout.write(output)
+    else: sys.exit(1)
