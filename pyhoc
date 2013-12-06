@@ -76,22 +76,22 @@ def main():
     subs.append([".*(%l)", ldir, lprompt, "".join([lprompt, " "]), "%l"])
     subs.append([".*(%L)", ldir, lprompt, lprompt, "%L"])
     subs.append([".*(%bl)", ldir, lprompt, "".join(["[", lprompt, "] "]), "%bl"])
-    subs.append([".*(bL)", ldir, lprompt, "".join(["[", lprompt, "]"]), "%bL"])
+    subs.append([".*(%bL)", ldir, lprompt, "".join(["[", lprompt, "]"]), "%bL"])
 
     subs.append([".*(%u)", udir, uprompt, "".join([uprompt, " "]), "%u"])
     subs.append([".*(%U)", udir, uprompt, uprompt, "%U"])
     subs.append([".*(%bu)", udir, uprompt, "".join(["[", uprompt, "] "]), "%bu"])
-    subs.append([".*(bU)", udir, uprompt, "".join(["[", uprompt, "]"]), "%bU"])
+    subs.append([".*(%bU)", udir, uprompt, "".join(["[", uprompt, "]"]), "%bU"])
 
     subs.append([".*(%c)", cdir, cprompt, "".join([cprompt, " "]), "%c"])
     subs.append([".*(%C)", cdir, cprompt, cprompt, "%C"])
     subs.append([".*(%bc)", cdir, cprompt, "".join(["[", cprompt, "] "]), "%bc"])
-    subs.append([".*(bC)", cdir, cprompt, "".join(["[", cprompt, "]"]), "%bC"])
+    subs.append([".*(%bC)", cdir, cprompt, "".join(["[", cprompt, "]"]), "%bC"])
 
     subs.append([".*(%d)", ddir, dprompt, "".join([dprompt, " "]), "%d"])
     subs.append([".*(%D)", ddir, dprompt, dprompt, "%D"])
     subs.append([".*(%bd)", ddir, dprompt, "".join(["[", dprompt, "] "]), "%bd"])
-    subs.append([".*(bD)", ddir, dprompt, "".join(["[", dprompt, "]"]), "%bD"])
+    subs.append([".*(%bD)", ddir, dprompt, "".join(["[", dprompt, "]"]), "%bD"])
 
     for literal in subs:
         if re.match(literal[0], out):
