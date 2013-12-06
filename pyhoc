@@ -59,39 +59,40 @@ def main():
     out = "".join(sys.argv[1:])
     config_dir = "/home/" + user_prompt() + "/.pyhoc/"
     config_folder(config_dir)
+
     ldir = config_dir + ".l"
+    lprompt = login_prompt()
+
     udir = config_dir + ".u"
+    uprompt = user_prompt()
+
     cdir = config_dir + ".c"
+    cprompt = comp_prompt()
+
     ddir = config_dir + ".d"
+    dprompt = dir_prompt()
+
     subs = []
 
-    subs.append([".*(%l)", ldir, login_prompt(), login_prompt() + " ", "%l"])
-    subs.append([".*(%L)", ldir, login_prompt(), login_prompt(), "%L"])
-    subs.append([".*(%bl)", ldir, login_prompt(), "[" + login_prompt() + "] ",
-                 "%bl"])
-    subs.append([".*(bL)", ldir, login_prompt(), "[" + login_prompt() + "]",
-                 "%bL"])
+    subs.append([".*(%l)", ldir, lprompt, lprompt + " ", "%l"])
+    subs.append([".*(%L)", ldir, lprompt, lprompt, "%L"])
+    subs.append([".*(%bl)", ldir, lprompt, "[" + lprompt + "] ", "%bl"])
+    subs.append([".*(bL)", ldir, lprompt, "[" + lprompt + "]", "%bL"])
 
-    subs.append([".*(%u)", udir, user_prompt(), user_prompt() + " ", "%u"])
-    subs.append([".*(%U)", udir, user_prompt(), user_prompt(), "%U"])
-    subs.append([".*(%bu)", udir, user_prompt(), "[" + user_prompt() + "] ",
-                 "%bu"])
-    subs.append([".*(bU)", udir, user_prompt(), "[" + user_prompt() + "]",
-                 "%bU"])
+    subs.append([".*(%u)", udir, uprompt, uprompt + " ", "%u"])
+    subs.append([".*(%U)", udir, uprompt, uprompt, "%U"])
+    subs.append([".*(%bu)", udir, uprompt, "[" + uprompt + "] ", "%bu"])
+    subs.append([".*(bU)", udir, uprompt, "[" + uprompt + "]", "%bU"])
 
-    subs.append([".*(%c)", cdir, comp_prompt(), comp_prompt() + " ", "%c"])
-    subs.append([".*(%C)", cdir, comp_prompt(), comp_prompt(), "%C"])
-    subs.append([".*(%bc)", cdir, comp_prompt(), "[" + comp_prompt() + "] ",
-                 "%bc"])
-    subs.append([".*(bC)", cdir, comp_prompt(), "[" + comp_prompt() + "]",
-                 "%bC"])
+    subs.append([".*(%c)", cdir, cprompt, cprompt + " ", "%c"])
+    subs.append([".*(%C)", cdir, cprompt, cprompt, "%C"])
+    subs.append([".*(%bc)", cdir, cprompt, "[" + cprompt + "] ", "%bc"])
+    subs.append([".*(bC)", cdir, cprompt, "[" + cprompt + "]", "%bC"])
 
-    subs.append([".*(%d)", ddir, dir_prompt(), dir_prompt() + " ", "%d"])
-    subs.append([".*(%D)", ddir, dir_prompt(), dir_prompt(), "%D"])
-    subs.append([".*(%bd)", ddir, dir_prompt(), "[" + dir_prompt() + "] ",
-                 "%bd"])
-    subs.append([".*(bD)", ddir, dir_prompt(), "[" + dir_prompt() + "]",
-                 "%bD"])
+    subs.append([".*(%d)", ddir, dprompt, dprompt + " ", "%d"])
+    subs.append([".*(%D)", ddir, dprompt, dprompt, "%D"])
+    subs.append([".*(%bd)", ddir, dprompt, "[" + dprompt + "] ", "%bd"])
+    subs.append([".*(bD)", ddir, dprompt, "[" + dprompt + "]", "%bD"])
 
     for literal in subs:
         if re.match(literal[0], out):
