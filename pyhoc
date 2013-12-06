@@ -59,35 +59,22 @@ def main():
     out = "".join(sys.argv[1:])
     config_dir = "/home/" + user_prompt() + "/.pyhoc/"
     config_folder(config_dir)
-    any_new_state = False
-    if re.match(".*(%l)", out):
-        new_state = check_status(config_dir + ".l", login_prompt())
-        if new_state:
-            any_new_state = True
-            out = re.sub("%l", login_prompt() + " ", out)
-        else:
-            out = re.sub("%l", "", out)
-    if re.match(".*(%u)", out):
-        new_state = check_status(config_dir + ".u", user_prompt())
-        if new_state:
-            any_new_state = True
-            out = re.sub("%u", user_prompt() + " ", out)
-        else:
-            out = re.sub("%u", "", out)
-    if re.match(".*(%c)", out):
-        new_state = check_status(config_dir + ".c", comp_prompt())
-        if new_state:
-            any_new_state = True
-            out = re.sub("%c", comp_prompt() + " ", out)
-        else:
-            out = re.sub("%c", "", out)
-    if re.match(".*(%d)", out):
-        new_state = check_status(config_dir + ".d", dir_prompt())
-        if new_state:
-            any_new_state = True
-            out = re.sub("%d", dir_prompt() + " ", out)
-        else:
-            out = re.sub("%d", "", out)
+    subs = []
+    subs.append([".*(%l)", config_dir + ".l", login_prompt(), login_prompt() + " ",
+                 "%l"])
+    subs.append([".*(%u)", config_dir + ".u", user_prompt(), user_prompt() + " ",
+                 "%u"])
+    subs.append([".*(%c)", config_dir + ".c", comp_prompt(), comp_prompt() + " ",
+                 "%c"])
+    subs.append([".*(%d)", config_dir + ".d", dir_prompt(), dir_prompt() + " ",
+                 "%d"])
+    for literal in subs:
+        if re.match(literal[0], out):
+            new_state = check_status(literal[1], literal[2])
+            if new_state:
+                out = re.sub(literal[4], literal[3], out)
+            else:
+                out = re.sub(literal[4], "", out)
     return out
 
 if __name__ == '__main__':
