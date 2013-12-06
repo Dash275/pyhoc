@@ -26,12 +26,68 @@ def dir_prompt():
         cwd = re.sub(homedir, "~", cwd)
     return cwd
 
+def config_folder(folder):
+    if os.path.exists(folder):
+        return True
+    else:
+        os.mkdir(folder)
+
+def config_file(file_path):
+    if os.path.exists(file_path):
+        return True
+    else:
+        f = open(file_path, 'w')
+        f.write("")
+        f.close()
+
+def check_status(log_file, new_state):
+    config_file(log_file)
+    f = open(log_file, 'r')
+    new_state_exp = new_state + "$"
+    old_state = f.read()
+    if re.match(new_state_exp, old_state):
+        f.close()
+        return False
+    else:
+        f.close()
+        f = open(log_file, 'w')
+        f.write(new_state)
+        f.close()
+        return True
+
 def main():
     out = "".join(sys.argv[1:])
-    out = re.sub("login|%l", login_prompt(), out)
-    out = re.sub("user|%u", user_prompt(), out)
-    out = re.sub("computer|%c", comp_prompt(), out)
-    out = re.sub("directory|%d", dir_prompt(), out)
+    config_dir = "/home/" + user_prompt() + "/.pyhoc/"
+    config_folder(config_dir)
+    any_new_state = False
+    if re.match("login|%l", out):
+        new_state = check_status(config_dir + ".l", login_prompt())
+        if new_state:
+            any_new_state = True
+            out = re.sub("%l", login_prompt(), out)
+        else:
+            out = re.sub("%l", "", out)
+    if re.match("user|%u", out):
+        new_state = check_status(config_dir + ".u", user_prompt())
+        if new_state:
+            any_new_state = True
+            out = re.sub("%u", user_prompt(), out)
+        else:
+            out = re.sub("%u", "", out)
+    if re.match("computer|%c", out):
+        new_state = check_status(config_dir + ".c", comp_prompt())
+        if new_state:
+            any_new_state = True
+            out = re.sub("%c", comp_prompt(), out)
+        else:
+            out = re.sub("%c", "", out)
+    if re.match("directory|%d", out):
+        new_state = check_status(config_dir + ".d", dir_prompt())
+        if new_state:
+            any_new_state = True
+            out = re.sub("%d", dir_prompt(), out)
+        else:
+            out = re.sub("%d", "", out)
     return out
 
 if __name__ == '__main__':
