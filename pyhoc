@@ -28,10 +28,10 @@ def dir_prompt():
 
 def main():
     out = "".join(sys.argv[1:])
-    out = re.sub("login", login_prompt(), out)
-    out = re.sub("user", user_prompt(), out)
-    out = re.sub("computer", comp_prompt(), out)
-    out = re.sub("directory", dir_prompt(), out)
+    out = re.sub("login|%l", login_prompt(), out)
+    out = re.sub("user|%u", user_prompt(), out)
+    out = re.sub("computer|%c", comp_prompt(), out)
+    out = re.sub("directory|%d", dir_prompt(), out)
     return out
 
 if __name__ == '__main__':
