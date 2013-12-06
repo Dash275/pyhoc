@@ -57,20 +57,19 @@ def check_status(log_file, new_state):
 
 def main():
     out = "".join(sys.argv[1:])
-    config_dir = "/home/" + user_prompt() + "/.pyhoc/"
-    config_folder(config_dir)
 
-    ldir = config_dir + ".l"
-    lprompt = login_prompt()
-
-    udir = config_dir + ".u"
     uprompt = user_prompt()
-
-    cdir = config_dir + ".c"
+    lprompt = login_prompt()
     cprompt = comp_prompt()
-
-    ddir = config_dir + ".d"
     dprompt = dir_prompt()
+
+    config_dir = "/home/" + uprompt + "/.pyhoc/"
+    ldir = config_dir + ".l"
+    udir = config_dir + ".u"
+    cdir = config_dir + ".c"
+    ddir = config_dir + ".d"
+
+    config_folder(config_dir)
 
     subs = []
 
