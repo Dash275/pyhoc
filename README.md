@@ -53,11 +53,41 @@ Formatting options:
 `%l` will return the traditional `user@computer `, with a trailing space so
 anything after it does not get truncated to it.
 
-`%u` will return your user name, with a trailing space so anything after it
-does not get truncated to it.
+`%L` will return the traditional `user@computer`, no trailing spaces.
 
-`%c` will return your computer's name, with a trailing space so anything after
+`%bl` will return `[user@computer] `, with a trailing space so anything after
 it does not get truncated to it.
 
-`%d` will return your current working directory, with a trailing space so
+`%bL` will return `[user@computer]`, no trailing spaces.
+
+`%u` will return your user name as `name `, with a trailing space so anything
+after it does not get truncated to it.
+
+`%U` will return your user name as `name`, no trailing spaces.
+
+`%bu` will return your user name as `[name] `, with a trailing space so
 anything after it does not get truncated to it.
+
+`%bU` will return your user name as `[name]`, no trailing spaces.
+
+`%c` will return your computer's name as `computer `, with a trailing space so
+anything after it does not get truncated to it.
+
+`%C` will return your computer's name as `computer`, no trailing spaces.
+
+`%bc` will return your computer's name as `[computer] `, with a trailing space
+so anything after it does not get truncated to it.
+
+`%bC` will return your computer's name as `[computer]`, no trailing spaces.
+
+`%d` will return your current working directory as `path/to/dir `, with a
+trailing space so anything after it does not get truncated to it.
+
+`%D` will return your current working directory as `path/to/dir`, no trailing
+spaces.
+
+`%bd` will return your current working directory as `[path/to/dir] `, with a
+trailing space so anything after it does not get truncated to it.
+
+`%bD` will return your current working directory as `[path/to/dir]`, no
+trailing spaces.
