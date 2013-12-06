@@ -60,34 +60,38 @@ def main():
     config_dir = "/home/" + user_prompt() + "/.pyhoc/"
     config_folder(config_dir)
     any_new_state = False
-    if re.match("login|%l", out):
+    if re.match(".*(%l)", out):
         new_state = check_status(config_dir + ".l", login_prompt())
         if new_state:
             any_new_state = True
             out = re.sub("%l", login_prompt(), out)
         else:
             out = re.sub("%l", "", out)
-    if re.match("user|%u", out):
+    if re.match(".*(%u)", out):
         new_state = check_status(config_dir + ".u", user_prompt())
         if new_state:
             any_new_state = True
             out = re.sub("%u", user_prompt(), out)
         else:
             out = re.sub("%u", "", out)
-    if re.match("computer|%c", out):
+    if re.match(".*(%c)", out):
         new_state = check_status(config_dir + ".c", comp_prompt())
         if new_state:
             any_new_state = True
             out = re.sub("%c", comp_prompt(), out)
         else:
             out = re.sub("%c", "", out)
-    if re.match("directory|%d", out):
+    if re.match(".*(%d)", out):
         new_state = check_status(config_dir + ".d", dir_prompt())
         if new_state:
             any_new_state = True
             out = re.sub("%d", dir_prompt(), out)
         else:
             out = re.sub("%d", "", out)
+    if re.match(".*(%n)", out) and any_new_state:
+        out = re.sub("%n", "\n", out)
+    else:
+        out = re.sub("%n", "", out)
     return out
 
 if __name__ == '__main__':
