@@ -50,10 +50,14 @@ zsh users remember to turn on prompt_subst.
 
 Formatting options:
 
-`%l` will return the traditional "user@computer", the same as calling `%u@%c`.
+`%l` will return the traditional `user@computer `, with a trailing space so
+anything after it does not get truncated to it.
 
-`%u` will return your user name
+`%u` will return your user name, with a trailing space so anything after it
+does not get truncated to it.
 
-`%c` will return your computer's name
+`%c` will return your computer's name, with a trailing space so anything after
+it does not get truncated to it.
 
-`%d` will return your current working directory.
+`%d` will return your current working directory, with a trailing space so
+anything after it does not get truncated to it.
