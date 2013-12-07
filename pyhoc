@@ -6,8 +6,7 @@ import sys
 import re
 
 def user_prompt():
-    os.getlogin = lambda: pwd.getpwuid(os.getuid())[0]
-    return os.getlogin()
+    return pwd.getpwuid(os.getuid())[0]
 
 def comp_prompt():
     return os.uname().nodename
@@ -43,7 +42,7 @@ def config_file(file_path):
 def check_status(log_file, new_state):
     config_file(log_file)
     f = open(log_file, 'r')
-    new_state_exp = new_state + "$"
+    new_state_exp = "".join([new_state, "$"])
     old_state = f.read()
     if re.match(new_state_exp, old_state):
         f.close()
@@ -63,11 +62,11 @@ def main():
     cprompt = comp_prompt()
     dprompt = dir_prompt()
 
-    config_dir = "/home/" + uprompt + "/.pyhoc/"
-    ldir = config_dir + ".l"
-    udir = config_dir + ".u"
-    cdir = config_dir + ".c"
-    ddir = config_dir + ".d"
+    config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
+    ldir = "".join([config_dir, ".l"])
+    udir = "".join([config_dir, ".u"])
+    cdir = "".join([config_dir, ".c"])
+    ddir = "".join([config_dir, ".d"])
 
     config_folder(config_dir)
 
