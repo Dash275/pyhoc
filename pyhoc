@@ -72,33 +72,33 @@ def main():
 
     subs = []
 
-    subs.append([".*(%l)", ldir, lprompt, "".join([lprompt, " "]), "%l"])
-    subs.append([".*(%L)", ldir, lprompt, lprompt, "%L"])
-    subs.append([".*(%bl)", ldir, lprompt, "".join(["[", lprompt, "] "]), "%bl"])
-    subs.append([".*(%bL)", ldir, lprompt, "".join(["[", lprompt, "]"]), "%bL"])
+    subs.append(["%l", ldir, lprompt, "".join([lprompt, " "])])
+    subs.append(["%L", ldir, lprompt, lprompt])
+    subs.append(["%bl", ldir, lprompt, "".join(["[", lprompt, "] "])])
+    subs.append(["%bL", ldir, lprompt, "".join(["[", lprompt, "]"])])
 
-    subs.append([".*(%u)", udir, uprompt, "".join([uprompt, " "]), "%u"])
-    subs.append([".*(%U)", udir, uprompt, uprompt, "%U"])
-    subs.append([".*(%bu)", udir, uprompt, "".join(["[", uprompt, "] "]), "%bu"])
-    subs.append([".*(%bU)", udir, uprompt, "".join(["[", uprompt, "]"]), "%bU"])
+    subs.append(["%u", udir, uprompt, "".join([uprompt, " "])])
+    subs.append(["%U", udir, uprompt, uprompt])
+    subs.append(["%bu", udir, uprompt, "".join(["[", uprompt, "] "])])
+    subs.append(["%bU", udir, uprompt, "".join(["[", uprompt, "]"])])
 
-    subs.append([".*(%c)", cdir, cprompt, "".join([cprompt, " "]), "%c"])
-    subs.append([".*(%C)", cdir, cprompt, cprompt, "%C"])
-    subs.append([".*(%bc)", cdir, cprompt, "".join(["[", cprompt, "] "]), "%bc"])
-    subs.append([".*(%bC)", cdir, cprompt, "".join(["[", cprompt, "]"]), "%bC"])
+    subs.append(["%c", cdir, cprompt, "".join([cprompt, " "])])
+    subs.append(["%C", cdir, cprompt, cprompt])
+    subs.append(["%bc", cdir, cprompt, "".join(["[", cprompt, "] "])])
+    subs.append(["%bC", cdir, cprompt, "".join(["[", cprompt, "]"])])
 
-    subs.append([".*(%d)", ddir, dprompt, "".join([dprompt, " "]), "%d"])
-    subs.append([".*(%D)", ddir, dprompt, dprompt, "%D"])
-    subs.append([".*(%bd)", ddir, dprompt, "".join(["[", dprompt, "] "]), "%bd"])
-    subs.append([".*(%bD)", ddir, dprompt, "".join(["[", dprompt, "]"]), "%bD"])
+    subs.append(["%d", ddir, dprompt, "".join([dprompt, " "])])
+    subs.append(["%D", ddir, dprompt, dprompt])
+    subs.append(["%bd", ddir, dprompt, "".join(["[", dprompt, "] "])])
+    subs.append(["%bD", ddir, dprompt, "".join(["[", dprompt, "]"])])
 
     for literal in subs:
-        if re.match(literal[0], out):
+        if re.search(literal[0], out):
             new_state = check_status(literal[1], literal[2])
             if new_state:
-                out = re.sub(literal[4], literal[3], out)
+                out = re.sub(literal[0], literal[3], out)
             else:
-                out = re.sub(literal[4], "", out)
+                out = re.sub(literal[0], "", out)
     return out
 
 if __name__ == '__main__':
