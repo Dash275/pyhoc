@@ -34,14 +34,12 @@ def dir_prompt(uname):
 
 def check_status(log_file, new_state):
     config_file(log_file)
-    f = open(log_file, 'r')
     new_state_exp = "".join([new_state, "$"])
+    f = open(log_file, 'r')
     old_state = f.read()
-    if re.match(new_state_exp, old_state):
-        f.close()
-        return False
+    f.close()
+    if re.match(new_state_exp, old_state): return False
     else:
-        f.close()
         f = open(log_file, 'w')
         f.write(new_state)
         f.close()
