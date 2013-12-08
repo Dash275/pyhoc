@@ -12,15 +12,13 @@ def user_prompt():
 def comp_prompt():
     return platform.node()
 
-def login_prompt():
-    user = user_prompt()
+def login_prompt(user):
     comp = comp_prompt()
     login = "@".join([user, comp])
     return login
 
-def dir_prompt():
+def dir_prompt(uname):
     cwd = os.getcwd()
-    uname = user_prompt()
     homedir = "".join(["/home/", uname])
     if re.match(homedir, cwd):
         cwd = re.sub(homedir, "~", cwd)
@@ -59,9 +57,9 @@ def main():
     out = "".join(sys.argv[1:])
 
     uprompt = user_prompt()
-    lprompt = login_prompt()
     cprompt = comp_prompt()
-    dprompt = dir_prompt()
+    lprompt = login_prompt(uprompt)
+    dprompt = dir_prompt(uprompt)
 
     config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
     ldir = "".join([config_dir, ".l"])
