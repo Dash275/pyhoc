@@ -23,8 +23,7 @@ def comp_prompt():
     return platform.node()
 
 def login_prompt(user, comp):
-    login = "@".join([user, comp])
-    return login
+    return "@".join([user, comp])
 
 def dir_prompt(uname):
     cwd = os.getcwd()
