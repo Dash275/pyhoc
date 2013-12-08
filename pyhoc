@@ -26,8 +26,7 @@ def user_prompt():
 def comp_prompt():
     return platform.node()
 
-def login_prompt(user):
-    comp = comp_prompt()
+def login_prompt(user, comp):
     login = "@".join([user, comp])
     return login
 
@@ -56,7 +55,7 @@ def check_status(log_file, new_state):
 def main(out):
     uprompt = user_prompt()
     cprompt = comp_prompt()
-    lprompt = login_prompt(uprompt)
+    lprompt = login_prompt(uprompt, cprompt)
     dprompt = dir_prompt(uprompt)
 
     config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
