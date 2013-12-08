@@ -1,10 +1,24 @@
 #!/usr/bin/env python
 
 import pwd
-import os
 import platform
+import os
 import sys
 import re
+
+def config_folder(folder):
+    if os.path.exists(folder):
+        return True
+    else:
+        os.mkdir(folder)
+
+def config_file(file_path):
+    if os.path.exists(file_path):
+        return True
+    else:
+        f = open(file_path, 'w')
+        f.write("")
+        f.close()
 
 def user_prompt():
     return pwd.getpwuid(os.getuid())[0]
@@ -23,20 +37,6 @@ def dir_prompt(uname):
     if re.match(homedir, cwd):
         cwd = re.sub(homedir, "~", cwd)
     return cwd
-
-def config_folder(folder):
-    if os.path.exists(folder):
-        return True
-    else:
-        os.mkdir(folder)
-
-def config_file(file_path):
-    if os.path.exists(file_path):
-        return True
-    else:
-        f = open(file_path, 'w')
-        f.write("")
-        f.close()
 
 def check_status(log_file, new_state):
     config_file(log_file)
@@ -62,12 +62,12 @@ def main():
     dprompt = dir_prompt(uprompt)
 
     config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
+    config_folder(config_dir)
+
     udir = "".join([config_dir, ".u"])
     cdir = "".join([config_dir, ".c"])
     ldir = "".join([config_dir, ".l"])
     ddir = "".join([config_dir, ".d"])
-
-    config_folder(config_dir)
 
     subs = []
 
@@ -98,6 +98,7 @@ def main():
                 out = re.sub(literal[0], literal[3], out)
             else:
                 out = re.sub(literal[0], "", out)
+
     return out
 
 if __name__ == '__main__':
