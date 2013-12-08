@@ -62,19 +62,14 @@ def main():
     dprompt = dir_prompt(uprompt)
 
     config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
-    ldir = "".join([config_dir, ".l"])
     udir = "".join([config_dir, ".u"])
     cdir = "".join([config_dir, ".c"])
+    ldir = "".join([config_dir, ".l"])
     ddir = "".join([config_dir, ".d"])
 
     config_folder(config_dir)
 
     subs = []
-
-    subs.append(["%l", ldir, lprompt, "".join([lprompt, " "])])
-    subs.append(["%L", ldir, lprompt, lprompt])
-    subs.append(["%bl", ldir, lprompt, "".join(["[", lprompt, "] "])])
-    subs.append(["%bL", ldir, lprompt, "".join(["[", lprompt, "]"])])
 
     subs.append(["%u", udir, uprompt, "".join([uprompt, " "])])
     subs.append(["%U", udir, uprompt, uprompt])
@@ -85,6 +80,11 @@ def main():
     subs.append(["%C", cdir, cprompt, cprompt])
     subs.append(["%bc", cdir, cprompt, "".join(["[", cprompt, "] "])])
     subs.append(["%bC", cdir, cprompt, "".join(["[", cprompt, "]"])])
+    
+    subs.append(["%l", ldir, lprompt, "".join([lprompt, " "])])
+    subs.append(["%L", ldir, lprompt, lprompt])
+    subs.append(["%bl", ldir, lprompt, "".join(["[", lprompt, "] "])])
+    subs.append(["%bL", ldir, lprompt, "".join(["[", lprompt, "]"])])
 
     subs.append(["%d", ddir, dprompt, "".join([dprompt, " "])])
     subs.append(["%D", ddir, dprompt, dprompt])
