@@ -53,9 +53,7 @@ def check_status(log_file, new_state):
         f.close()
         return True
 
-def main():
-    out = "".join(sys.argv[1:])
-
+def main(out):
     uprompt = user_prompt()
     cprompt = comp_prompt()
     lprompt = login_prompt(uprompt)
@@ -102,6 +100,6 @@ def main():
     return out
 
 if __name__ == '__main__':
-    output = main()
+    output = main("".join(sys.argv[1:]))
     if output: sys.stdout.write(output)
     else: sys.exit(1)
