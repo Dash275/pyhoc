@@ -7,15 +7,11 @@ import sys
 import re
 
 def config_folder(folder):
-    if os.path.exists(folder):
-        return True
-    else:
+    if not os.path.exists(folder):
         os.mkdir(folder)
 
 def config_file(file_path):
-    if os.path.exists(file_path):
-        return True
-    else:
+    if not os.path.exists(file_path):
         f = open(file_path, 'w')
         f.write("")
         f.close()
