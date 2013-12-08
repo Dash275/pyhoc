@@ -63,6 +63,7 @@ def main(out):
 
     subs = []
 
+    # 0: Regex, 1: config file location, 2: new state, 3: output given a regex
     subs.append(["%u", udir, uprompt, "".join([uprompt, " "])])
     subs.append(["%U", udir, uprompt, uprompt])
     subs.append(["%bu", udir, uprompt, "".join(["[", uprompt, "] "])])
