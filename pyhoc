@@ -64,25 +64,25 @@ def main(out):
     subs = []
 
     # 0: Regex, 1: config file location, 2: new state, 3: output given a regex
-    subs.append(["%u", udir, uprompt, "".join((uprompt, " "))])
-    subs.append(["%U", udir, uprompt, uprompt])
-    subs.append(["%bu", udir, uprompt, "".join(("[", uprompt, "] "))])
-    subs.append(["%bU", udir, uprompt, "".join(("[", uprompt, "]"))])
+    subs.append(("%u", udir, uprompt, "".join((uprompt, " "))))
+    subs.append(("%U", udir, uprompt, uprompt))
+    subs.append(("%bu", udir, uprompt, "".join(("[", uprompt, "] "))))
+    subs.append(("%bU", udir, uprompt, "".join(("[", uprompt, "]"))))
 
-    subs.append(["%c", cdir, cprompt, "".join((cprompt, " "))])
-    subs.append(["%C", cdir, cprompt, cprompt])
-    subs.append(["%bc", cdir, cprompt, "".join(("[", cprompt, "] "))])
-    subs.append(["%bC", cdir, cprompt, "".join(("[", cprompt, "]"))])
+    subs.append(("%c", cdir, cprompt, "".join((cprompt, " "))))
+    subs.append(("%C", cdir, cprompt, cprompt))
+    subs.append(("%bc", cdir, cprompt, "".join(("[", cprompt, "] "))))
+    subs.append(("%bC", cdir, cprompt, "".join(("[", cprompt, "]"))))
 
-    subs.append(["%l", ldir, lprompt, "".join((lprompt, " "))])
-    subs.append(["%L", ldir, lprompt, lprompt])
-    subs.append(["%bl", ldir, lprompt, "".join(("[", lprompt, "] "))])
-    subs.append(["%bL", ldir, lprompt, "".join(("[", lprompt, "]"))])
+    subs.append(("%l", ldir, lprompt, "".join((lprompt, " "))))
+    subs.append(("%L", ldir, lprompt, lprompt))
+    subs.append(("%bl", ldir, lprompt, "".join(("[", lprompt, "] "))))
+    subs.append(("%bL", ldir, lprompt, "".join(("[", lprompt, "]"))))
 
-    subs.append(["%d", ddir, dprompt, "".join((dprompt, " "))])
-    subs.append(["%D", ddir, dprompt, dprompt])
-    subs.append(["%bd", ddir, dprompt, "".join(("[", dprompt, "] "))])
-    subs.append(["%bD", ddir, dprompt, "".join(("[", dprompt, "]"))])
+    subs.append(("%d", ddir, dprompt, "".join((dprompt, " "))))
+    subs.append(("%D", ddir, dprompt, dprompt))
+    subs.append(("%bd", ddir, dprompt, "".join(("[", dprompt, "] "))))
+    subs.append(("%bD", ddir, dprompt, "".join(("[", dprompt, "]"))))
 
     for literal in subs:
         if re.search(literal[0], out):
