@@ -23,18 +23,17 @@ def comp_prompt():
     return platform.node()
 
 def login_prompt(user, comp):
-    return "@".join([user, comp])
+    return "@".join((user, comp))
 
 def dir_prompt(uname):
     cwd = os.getcwd()
-    homedir = "".join(["/home/", uname])
+    homedir = "".join(("/home/", uname))
     if re.match(homedir, cwd):
         cwd = re.sub(homedir, "~", cwd)
     return cwd
 
 def check_status(log_file, new_state):
-    config_file(log_file)
-    new_state_exp = "".join([new_state, "$"])
+    new_state_exp = "".join((new_state, "$"))
     f = open(log_file, 'r')
     old_state = f.read()
     f.close()
@@ -51,36 +50,39 @@ def main(out):
     lprompt = login_prompt(uprompt, cprompt)
     dprompt = dir_prompt(uprompt)
 
-    config_dir = "".join(["/home/", uprompt, "/.pyhoc/"])
+    config_dir = "".join(("/home/", uprompt, "/.pyhoc/"))
     config_folder(config_dir)
 
-    udir = "".join([config_dir, ".u"])
-    cdir = "".join([config_dir, ".c"])
-    ldir = "".join([config_dir, ".l"])
-    ddir = "".join([config_dir, ".d"])
+    udir = "".join((config_dir, ".u"))
+    cdir = "".join((config_dir, ".c"))
+    ldir = "".join((config_dir, ".l"))
+    ddir = "".join((config_dir, ".d"))
+
+    for xdir in set([udir, cdir, ldir, ddir]):
+        config_file(xdir)
 
     subs = []
 
     # 0: Regex, 1: config file location, 2: new state, 3: output given a regex
-    subs.append(["%u", udir, uprompt, "".join([uprompt, " "])])
+    subs.append(["%u", udir, uprompt, "".join((uprompt, " "))])
     subs.append(["%U", udir, uprompt, uprompt])
-    subs.append(["%bu", udir, uprompt, "".join(["[", uprompt, "] "])])
-    subs.append(["%bU", udir, uprompt, "".join(["[", uprompt, "]"])])
+    subs.append(["%bu", udir, uprompt, "".join(("[", uprompt, "] "))])
+    subs.append(["%bU", udir, uprompt, "".join(("[", uprompt, "]"))])
 
-    subs.append(["%c", cdir, cprompt, "".join([cprompt, " "])])
+    subs.append(["%c", cdir, cprompt, "".join((cprompt, " "))])
     subs.append(["%C", cdir, cprompt, cprompt])
-    subs.append(["%bc", cdir, cprompt, "".join(["[", cprompt, "] "])])
-    subs.append(["%bC", cdir, cprompt, "".join(["[", cprompt, "]"])])
+    subs.append(["%bc", cdir, cprompt, "".join(("[", cprompt, "] "))])
+    subs.append(["%bC", cdir, cprompt, "".join(("[", cprompt, "]"))])
 
-    subs.append(["%l", ldir, lprompt, "".join([lprompt, " "])])
+    subs.append(["%l", ldir, lprompt, "".join((lprompt, " "))])
     subs.append(["%L", ldir, lprompt, lprompt])
-    subs.append(["%bl", ldir, lprompt, "".join(["[", lprompt, "] "])])
-    subs.append(["%bL", ldir, lprompt, "".join(["[", lprompt, "]"])])
+    subs.append(["%bl", ldir, lprompt, "".join(("[", lprompt, "] "))])
+    subs.append(["%bL", ldir, lprompt, "".join(("[", lprompt, "]"))])
 
-    subs.append(["%d", ddir, dprompt, "".join([dprompt, " "])])
+    subs.append(["%d", ddir, dprompt, "".join((dprompt, " "))])
     subs.append(["%D", ddir, dprompt, dprompt])
-    subs.append(["%bd", ddir, dprompt, "".join(["[", dprompt, "] "])])
-    subs.append(["%bD", ddir, dprompt, "".join(["[", dprompt, "]"])])
+    subs.append(["%bd", ddir, dprompt, "".join(("[", dprompt, "] "))])
+    subs.append(["%bD", ddir, dprompt, "".join(("[", dprompt, "]"))])
 
     for literal in subs:
         if re.search(literal[0], out):
