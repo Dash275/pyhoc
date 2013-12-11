@@ -68,7 +68,7 @@ def main(out):
 
     subs = []
 
-    # 0: Regex, 1: config file location, 2: new state, 3: output given a regex
+    # 0: Regex, 1: state newness (true = new) 2: output given regex
     subs.append(("%u", ustate, "".join((uprompt, " "))))
     subs.append(("%U", ustate, uprompt))
     subs.append(("%bu", ustate, "".join(("[", uprompt, "] "))))
