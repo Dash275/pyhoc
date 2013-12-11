@@ -61,34 +61,37 @@ def main(out):
     for xdir in set([udir, cdir, ldir, ddir]):
         config_file(xdir)
 
+    ustate = check_status(udir, uprompt)
+    cstate = check_status(cdir, cprompt)
+    lstate = check_status(ldir, lprompt)
+    dstate = check_status(ddir, dprompt)
+
     subs = []
 
     # 0: Regex, 1: config file location, 2: new state, 3: output given a regex
-    subs.append(("%u", udir, uprompt, "".join((uprompt, " "))))
-    subs.append(("%U", udir, uprompt, uprompt))
-    subs.append(("%bu", udir, uprompt, "".join(("[", uprompt, "] "))))
-    subs.append(("%bU", udir, uprompt, "".join(("[", uprompt, "]"))))
+    subs.append(("%u", ustate, "".join((uprompt, " "))))
+    subs.append(("%U", ustate, uprompt))
+    subs.append(("%bu", ustate, "".join(("[", uprompt, "] "))))
+    subs.append(("%bU", ustate, "".join(("[", uprompt, "]"))))
 
-    subs.append(("%c", cdir, cprompt, "".join((cprompt, " "))))
-    subs.append(("%C", cdir, cprompt, cprompt))
-    subs.append(("%bc", cdir, cprompt, "".join(("[", cprompt, "] "))))
-    subs.append(("%bC", cdir, cprompt, "".join(("[", cprompt, "]"))))
+    subs.append(("%c", cstate, "".join((cprompt, " "))))
+    subs.append(("%C", cstate, cprompt))
+    subs.append(("%bc", cstate, "".join(("[", cprompt, "] "))))
+    subs.append(("%bC", cstate, "".join(("[", cprompt, "]"))))
 
-    subs.append(("%l", ldir, lprompt, "".join((lprompt, " "))))
-    subs.append(("%L", ldir, lprompt, lprompt))
-    subs.append(("%bl", ldir, lprompt, "".join(("[", lprompt, "] "))))
-    subs.append(("%bL", ldir, lprompt, "".join(("[", lprompt, "]"))))
+    subs.append(("%l", lstate, "".join((lprompt, " "))))
+    subs.append(("%L", lstate, lprompt))
+    subs.append(("%bl", lstate, "".join(("[", lprompt, "] "))))
+    subs.append(("%bL", lstate, "".join(("[", lprompt, "]"))))
 
-    subs.append(("%d", ddir, dprompt, "".join((dprompt, " "))))
-    subs.append(("%D", ddir, dprompt, dprompt))
-    subs.append(("%bd", ddir, dprompt, "".join(("[", dprompt, "] "))))
-    subs.append(("%bD", ddir, dprompt, "".join(("[", dprompt, "]"))))
+    subs.append(("%d", dstate, "".join((dprompt, " "))))
+    subs.append(("%D", dstate, dprompt))
+    subs.append(("%bd", dstate, "".join(("[", dprompt, "] "))))
+    subs.append(("%bD", dstate, "".join(("[", dprompt, "]"))))
 
     for literal in subs:
-        if re.search(literal[0], out):
-            new_state = check_status(literal[1], literal[2])
-            if new_state: out = re.sub(literal[0], literal[3], out)
-            else: out = re.sub(literal[0], "", out)
+        if literal[1]: out = re.sub(literal[0], literal[2], out)
+        else: out = re.sub(literal[0], "", out)
 
     return out
 
