@@ -62,30 +62,30 @@ def main(out):
 
     subs = []
 
-    # 0: Regex, 1: state newness (true = new) 2: output given regex
-    subs.append(("%u", ustate, "".join((uprompt, " "))))
-    subs.append(("%U", ustate, uprompt))
-    subs.append(("%bu", ustate, "".join(("[", uprompt, "] "))))
-    subs.append(("%bU", ustate, "".join(("[", uprompt, "]"))))
+    # 0: State newness (true = new), 1: flag 2: output given flag
+    subs.append((ustate, "%u", "".join((uprompt, " "))))
+    subs.append((ustate, "%U", uprompt))
+    subs.append((ustate, "%bu", "".join(("[", uprompt, "] "))))
+    subs.append((ustate, "%bU", "".join(("[", uprompt, "]"))))
 
-    subs.append(("%c", cstate, "".join((cprompt, " "))))
-    subs.append(("%C", cstate, cprompt))
-    subs.append(("%bc", cstate, "".join(("[", cprompt, "] "))))
-    subs.append(("%bC", cstate, "".join(("[", cprompt, "]"))))
+    subs.append((cstate, "%c", "".join((cprompt, " "))))
+    subs.append((cstate, "%C", cprompt))
+    subs.append((cstate, "%bc", "".join(("[", cprompt, "] "))))
+    subs.append((cstate, "%bC", "".join(("[", cprompt, "]"))))
 
-    subs.append(("%l", lstate, "".join((lprompt, " "))))
-    subs.append(("%L", lstate, lprompt))
-    subs.append(("%bl", lstate, "".join(("[", lprompt, "] "))))
-    subs.append(("%bL", lstate, "".join(("[", lprompt, "]"))))
+    subs.append((lstate, "%l", "".join((lprompt, " "))))
+    subs.append((lstate, "%L", lprompt))
+    subs.append((lstate, "%bl", "".join(("[", lprompt, "] "))))
+    subs.append((lstate, "%bL", "".join(("[", lprompt, "]"))))
 
-    subs.append(("%d", dstate, "".join((dprompt, " "))))
-    subs.append(("%D", dstate, dprompt))
-    subs.append(("%bd", dstate, "".join(("[", dprompt, "] "))))
-    subs.append(("%bD", dstate, "".join(("[", dprompt, "]"))))
+    subs.append((dstate, "%d", "".join((dprompt, " "))))
+    subs.append((dstate, "%D", dprompt))
+    subs.append((dstate, "%bd", "".join(("[", dprompt, "] "))))
+    subs.append((dstate, "%bD", "".join(("[", dprompt, "]"))))
 
     for literal in subs:
-        if literal[1]: out = re.sub(literal[0], literal[2], out)
-        else: out = re.sub(literal[0], "", out)
+        if literal[0]: out = re.sub(literal[1], literal[2], out)
+        else: out = re.sub(literal[1], "", out)
 
     return out
 
