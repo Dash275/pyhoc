@@ -12,9 +12,7 @@ def config_folder(folder):
 
 def config_file(file_path):
     if not os.path.exists(file_path):
-        f = open(file_path, 'w')
-        f.write("")
-        f.close()
+        with open(file_path, 'w') as f: f.write("")
 
 def user_prompt():
     return pwd.getpwuid(os.getuid())[0]
@@ -34,14 +32,11 @@ def dir_prompt(uname):
 
 def check_status(log_file, new_state):
     new_state_exp = "".join((new_state, "$"))
-    f = open(log_file, 'r')
-    old_state = f.read()
-    f.close()
+    with open(log_file, 'r') as f:
+        old_state = f.read()
     if re.match(new_state_exp, old_state): return False
     else:
-        f = open(log_file, 'w')
-        f.write(new_state)
-        f.close()
+        with open(log_file, 'w') as f: f.write(new_state)
         return True
 
 def main(out):
@@ -58,8 +53,7 @@ def main(out):
     ldir = "".join((config_dir, ".l"))
     ddir = "".join((config_dir, ".d"))
 
-    for xdir in set([udir, cdir, ldir, ddir]):
-        config_file(xdir)
+    for xdir in set([udir, cdir, ldir, ddir]): config_file(xdir)
 
     ustate = check_status(udir, uprompt)
     cstate = check_status(cdir, cprompt)
