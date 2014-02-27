@@ -15,7 +15,7 @@ def config_file(file_path):
         with open(file_path, 'w') as f: f.write("")
 
 def user_prompt():
-    return pwd.getpwuid(os.getuid())[0]
+    return pwd.getpwuid(os.getuid())[0] # Nasty, but best py2.7 way to do it.
 
 def comp_prompt():
     return platform.node()
@@ -40,23 +40,23 @@ def check_status(log_file, new_state):
         return True
 
 def main(out):
-    uprompt = user_prompt()
+    uprompt = user_prompt() # Begin by determining current states.
     cprompt = comp_prompt()
     lprompt = login_prompt(uprompt, cprompt)
     dprompt = dir_prompt(uprompt)
 
     config_dir = "".join(("/home/", uprompt, "/.pyhoc/"))
-    config_folder(config_dir)
+    config_folder(config_dir) # Make sure the config folder exists.
 
-    udir = "".join((config_dir, ".u"))
+    udir = "".join((config_dir, ".u")) # Make sure the config files exist.
     cdir = "".join((config_dir, ".c"))
     ldir = "".join((config_dir, ".l"))
     ddir = "".join((config_dir, ".d"))
 
     for xdir in set([udir, cdir, ldir, ddir]): config_file(xdir)
 
-    ustate = check_status(udir, uprompt)
-    cstate = check_status(cdir, cprompt)
+    ustate = check_status(udir, uprompt) # Determine if the states are new
+    cstate = check_status(cdir, cprompt) # True or False
     lstate = check_status(ldir, lprompt)
     dstate = check_status(ddir, dprompt)
 
@@ -83,7 +83,7 @@ def main(out):
     subs.append((dstate, "%bd", "".join(("[", dprompt, "] "))))
     subs.append((dstate, "%bD", "".join(("[", dprompt, "]"))))
 
-    for literal in subs:
+    for literal in subs: # If state is new, then replace flags accordingly.
         if literal[0]: out = re.sub(literal[1], literal[2], out)
         else: out = re.sub(literal[1], "", out)
 
