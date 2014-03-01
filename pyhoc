@@ -7,8 +7,7 @@ import os
 import re
 
 def config_folder(folder):
-    if not os.path.exists(folder):
-        os.mkdir(folder)
+    if not os.path.exists(folder): os.mkdir(folder)
 
 def config_file(file_path):
     if not os.path.exists(file_path):
@@ -31,8 +30,7 @@ def dir_prompt(uname):
 
 def check_status(log_file, new_state):
     new_state_exp = "".join((new_state, "$"))
-    with open(log_file, 'r') as f:
-        old_state = f.read()
+    with open(log_file, 'r') as f: old_state = f.read()
     if re.match(new_state_exp, old_state): return False
     else:
         with open(log_file, 'w') as f: f.write(new_state)
@@ -61,7 +59,7 @@ def main(out):
 
     subs = []
 
-    # 0: State newness (true = new), 1: flag 2: output given flag
+    # 0: State newness (True = new), 1: flag, 2: output given flag
     subs.append((ustate, "%u", "".join((uprompt, " "))))
     subs.append((ustate, "%U", uprompt))
     subs.append((ustate, "%bu", "".join(("[", uprompt, "] "))))
@@ -89,5 +87,5 @@ def main(out):
     return out
 
 if __name__ == '__main__':
-    output = main("".join(sys.argv[1:]))
-    sys.stdout.write(output)
+    out = main("".join(sys.argv[1:]))
+    sys.stdout.write(out)
