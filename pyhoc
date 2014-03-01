@@ -25,9 +25,8 @@ def login_prompt(user, comp):
 
 def dir_prompt(uname):
     cwd = os.getcwd()
-    homedir = "".join(("/home/", uname))
-    if re.match(homedir, cwd):
-        cwd = re.sub(homedir, "~", cwd)
+    homedir = "".join(("^/home/", uname))
+    cwd = re.sub(homedir, "~", cwd)
     return cwd
 
 def check_status(log_file, new_state):
