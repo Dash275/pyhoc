@@ -45,6 +45,11 @@ its PS1 variable.
 
     PS1='$(pyhoc "%l%d")%#'
 
+Or you can put it anywhere on your computer and call it that way. Macs for
+instance don't have ~/bin/ in the path, so this is valid:
+
+    PS1='$(~/bin/pyhoc "%l%d")%#'
+
 zsh users remember to turn on prompt_subst.
 
 
