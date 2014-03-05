@@ -22,9 +22,9 @@ def comp_prompt():
 def login_prompt(user, comp):
     return "@".join((user, comp))
 
-def dir_prompt(uname):
+def dir_prompt(uname, homeroot):
     cwd = os.getcwd()
-    homedir = "".join(("^/home/", uname))
+    homedir = "".join(("^", homeroot, uname))
     cwd = re.sub(homedir, "~", cwd)
     return cwd
 
@@ -37,12 +37,14 @@ def check_status(log_file, new_state):
         return True
 
 def main(out):
+    if sys.platform == 'darwin': homeroot = "/Users/"
+    else: homeroot = "/home/"
     uprompt = user_prompt() # Begin by determining current states.
     cprompt = comp_prompt()
     lprompt = login_prompt(uprompt, cprompt)
-    dprompt = dir_prompt(uprompt)
+    dprompt = dir_prompt(uprompt, homeroot)
 
-    config_dir = "".join(("/home/", uprompt, "/.pyhoc/"))
+    config_dir = "".join((homeroot, uprompt, "/.pyhoc/"))
     config_folder(config_dir) # Make sure the config folder exists.
 
     udir = "".join((config_dir, ".u")) # Make sure the config files exist.
